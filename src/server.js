@@ -53,6 +53,10 @@ io.on('connection', async(socket) => {
     socket.to(instancename).emit('server_update', updatedData);
   })
 
+  socket.on('hey_listen', () => {
+    console.log("i'm awake")
+  })
+
   socket.on('disconnect', () => {
     // on dc check to see how many remaining connections 
     // wait this doesn't work how i want it to

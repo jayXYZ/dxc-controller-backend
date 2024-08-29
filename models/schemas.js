@@ -19,7 +19,9 @@ const dataSchema = new Schema({
     format: {type:String, default:'Premodern'},
     commentators: {type:String, default:''},
     round: {type:String, default:''},
-    cardimage: {type:String, default:'https://cards.scryfall.io/png/front/c/a/ca367f49-0f4a-4b7f-8104-851893fbcd8a.png?1562937711'}
+    cardimage: {type:String, default:'https://cards.scryfall.io/png/front/c/a/ca367f49-0f4a-4b7f-8104-851893fbcd8a.png?1562937711'},
+    timerExpiry: {type:Date, default:null},
+    timerIsRunning: {type:Boolean, default:false}
 })
 
 const Data = mongoose.model('Data', dataSchema, 'data')
