@@ -54,7 +54,7 @@ io.on('connection', async(socket) => {
   })
 
   socket.on('update_data', async(data) => {
-    const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, data, {new: true});
+    const updatedData = await Data.findOneAndUpdate('skibidi69', data, {new: true});
     socket.emit('server_update', updatedData);
   })
 
