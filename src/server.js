@@ -33,7 +33,7 @@ io.on('connection', async(socket) => {
   console.log('a user connected');
 
   socket.on('request_data', async() => {
-    const query = await Data.find('skibidi69').exec()
+    const query = await Data.find({ id: 'skibidi69' }).exec()
     socket.emit('server_update', query);
   })
 
@@ -54,7 +54,7 @@ io.on('connection', async(socket) => {
   })
 
   socket.on('update_data', async(data) => {
-    const updatedData = await Data.findOneAndUpdate('skibidi69', data, {new: true});
+    const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, data, {new: true});
     socket.emit('server_update', updatedData);
   })
 
