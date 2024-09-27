@@ -53,9 +53,9 @@ io.on('connection', async(socket) => {
     console.log('added user to room ' + instancename);
   })
 
-  socket.on('update_data', async(instancename, data) => {
-    const updatedData = await Data.findOneAndUpdate({id: instancename}, data, {new: true});
-    socket.to(instancename).emit('server_update', updatedData);
+  socket.on('update_data', async(data) => {
+    const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, data, {new: true});
+    socket.emit('server_update', updatedData);
   })
 
   socket.on('hey_listen', () => {
