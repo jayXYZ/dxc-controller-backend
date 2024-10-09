@@ -58,6 +58,11 @@ io.on('connection', async(socket) => {
     socket.emit('server_update', updatedData);
   })
 
+  socket.on('increment_games_won', async(playerindex) => {
+    const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, { [`p${playerindex + 1}gameswon`]: 1 }, {new: true});
+    socket.emit('server_update', updatedData);
+  })
+
   socket.on('hey_listen', () => {
     console.log("i'm awake")
   })
