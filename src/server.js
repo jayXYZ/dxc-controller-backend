@@ -59,7 +59,9 @@ io.on('connection', async(socket) => {
   })
 
   socket.on('increment_games_won', async(playerindex) => {
-    const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, { [`p${playerindex + 1}gameswon`]: 1 }, {new: true});
+    const query = await Data.findOne({ id: 'skibidi69' }).exec()
+    let payload = (playerindex === 0) ? { p1gameswon: query.p1gameswon + 1 } : { p2gameswon: query.p2gameswon + 1 }
+    const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, payload, {new: true});
     socket.emit('server_update', updatedData);
   })
 
