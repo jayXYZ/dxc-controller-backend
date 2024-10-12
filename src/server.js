@@ -37,45 +37,20 @@ io.on('connection', async(socket) => {
     socket.emit('server_update', query);
   })
 
-  socket.on('check_if_active', async(instancename, callback) => {
-    const query = await Data.find({ id: instancename }).exec()
-    callback(query);
-  })
-
-  socket.on('create_instance', async(instancename) => {
-    await new Data({id:instancename}).save();
-  })
-
-  socket.on('join_instance', async(instancename, callback) => {
-    const currentData = await Data.findOne({id: instancename})
-    socket.join(instancename);
-    callback(currentData);
-    console.log('added user to room ' + instancename);
-  })
-
   socket.on('update_data', async(data) => {
     const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, data, {new: true});
-    socket.emit('server_update', updatedData);
+    io.emit('server_update', updatedData);
   })
 
   socket.on('increment_games_won', async(playerindex) => {
     const query = await Data.findOne({ id: 'skibidi69' }).exec()
     let payload = (playerindex === 0) ? { p1gameswon: query.p1gameswon + 1 } : { p2gameswon: query.p2gameswon + 1 }
     const updatedData = await Data.findOneAndUpdate({id: 'skibidi69'}, payload, {new: true});
-    socket.emit('server_update', updatedData);
-  })
-
-  socket.on('hey_listen', () => {
-    console.log("i'm awake")
+    io.emit('server_update', updatedData);
   })
 
   socket.on('disconnect', () => {
-    // on dc check to see how many remaining connections 
-    // wait this doesn't work how i want it to
-    // need to check how many sockets are in a room?
-    // so i need to create an array that stores all the connections
-    // that get added to a room?
-
+    console.log('user disconnected');
   })
 });
 
