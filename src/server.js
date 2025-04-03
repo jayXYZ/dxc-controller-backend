@@ -193,8 +193,8 @@ async function parseSpicerackData(data) {
   // Get current match data
   const query = await Data.findOne(databaseObject).exec();
   // Get current round
-  // const currentRound = getCurrentRound(data.tournament_phases);
-  const currentRound = data.tournament_phases[0].rounds[0];
+  const currentRound = getCurrentRound(data.tournament_phases);
+
   if (!currentRound) {
     return;
   }
