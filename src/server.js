@@ -182,6 +182,20 @@ io.on("connection", async (socket) => {
     }
   );
 
+  socket.on("begin_timer", async (matchId) => {
+    const updatedData = await Data.findOneAndUpdate(
+      databaseObject,
+      {
+        [`${matchId}timerIsRunning`]: true,
+        [`${matchId}timerExpiry`]: new Date(Date.now() + 300000),
+      },
+      {
+        new: true,
+      }
+    );
+    io.emit("server_update", updatedData);
+  });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
