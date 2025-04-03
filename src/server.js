@@ -187,7 +187,7 @@ io.on("connection", async (socket) => {
       databaseObject,
       {
         [`${matchId}timerIsRunning`]: true,
-        [`${matchId}timerExpiry`]: new Date(Date.now() + 300000),
+        [`${matchId}timerExpiry`]: new Date(Date.now() + 3000000),
       },
       {
         new: true,
